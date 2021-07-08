@@ -1,0 +1,11 @@
+在项目中分片字段规范命名为burst，类型为String，值格式为dataId-分表ID，
+
+dataId用于分组ID计算，为数据量提供扩展性；分表ID用于组内表的分配，其分片公式如下：
+
+
+分片ID = （dataId/volume）* step + 分表ID /mod
+
+
+Volume 是每组分片的数据容量
+Step是每组分片的DateNode数量
+Mode是表在每组分片中的节点数量

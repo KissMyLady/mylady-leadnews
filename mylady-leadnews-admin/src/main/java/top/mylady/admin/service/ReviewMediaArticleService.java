@@ -1,0 +1,11 @@
+package top.mylady.admin.service;
+
+
+
+public interface ReviewMediaArticleService {
+
+    /**
+     * 自媒体端发布文章审核
+     */
+    public void autoReviewArticleByMedia(Integer newsId);
+}

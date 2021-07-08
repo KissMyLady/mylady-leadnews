@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="top.mylady.model.mappers.wemedia.WmMaterialMapper">
+
+
+    <resultMap id="BaseResultMap" type="top.mylady.model.media.pojos.WmMaterial">
+        <id column="id"/>
+        <result column="user_id"/>
+        <result column="url"/>
+        <result column="type"/>
+        <result column="is_collection"/>
+        <result column="created_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, url, type, is_collection, created_time
+    </sql>
+
+    <insert id="insertMaterial" parameterType="top.mylady.model.media.pojos.WmMaterial"
+            useGeneratedKeys="true" keyProperty="id">
+	insert into wm_material (user_id,   url,   type,     is_collection,  created_time)
+	values                 (#{userId}, #{url}, #{type}, #{isCollection}, #{createdTime})
+	</insert>
+
+    <!--根据id查询-->
+    <select id="selectByMaterialId" resultType="top.mylady.model.media.pojos.WmMaterial"
+            parameterType="java.lang.Integer">
+        select
+         <include refid="Base_Column_List"/>
+        from wm_material
+        where id = #{id}
+    </select>
+
+    <!--根据id删除-->
+    <delete id="deleteByMaterialId" parameterType="java.lang.Integer">
+	    delete from wm_material  where id = #{id}
+    </delete>
+
+
+    <!--根据用户id查询需要查询的图片状态(是否收藏), 查询图片-->
+    <select id="findListByUidAndStatus" resultType="top.mylady.model.media.pojos.WmMaterial">
+        select
+        <include refid="Base_Column_List"/>
+        from wm_material
+        where user_id = #{uid}
+        <if test="dto.isCollected == 1">
+            and is_collection = #{dto.isCollected}
+        </if>
+        limit ${(dto.page - 1) * dto.size}, ${dto.size}
+    </select>
+
+    <!--进行分页统计-->
+    <select id="countListByUidAndStatus" resultType="java.lang.Integer">
+        select count(0) from wm_material where user_id = #{uid}
+        <if test="dto.isCollected == 1">
+            and is_collection = #{dto.isCollected}
+        </if>
+    </select>
+
+    <update id="updateStatusByUidAndId">
+        update wm_material set is_collection = #{type}
+        where user_id = #{userId} and id = #{id}
+    </update>
+
+    <select id="findMaterialByUidAndImgUrls" resultType="top.mylady.model.media.pojos.WmMaterial">
+        select id, url from wm_material
+        where user_id = #{uid} and url in
+
+        <foreach item="item" index="index" collection="values"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+</mapper>

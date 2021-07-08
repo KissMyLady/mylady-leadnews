@@ -1,0 +1,27 @@
+/target/
+.idea
+/lib
+/libs
+/log*
+
+# Project exclude paths
+/mylady-leadnews-admin/target/
+/mylady-leadnews-admin-gateway/target/
+
+/mylady-leadnews-api/target/
+/mylady-leadnews-app-gateway/target/
+/mylady-leadnews-article/target/
+/mylady-leadnews-behavior/target/
+/mylady-leadnews-comment/target/
+/mylady-leadnews-common/target/
+/mylady-leadnews-model/target/
+
+/mylady-leadnews-search/target/
+/mylady-leadnews-seata/target/
+/mylady-leadnews-user/target/
+/mylady-leadnews-utils/target/
+/mylady-leadnews-wemedia/target/
+/mylady-leadnews-wemedia-gateway/target/
+
+# git rm -r --cached .
+# git config core.excludesfile .gitignore

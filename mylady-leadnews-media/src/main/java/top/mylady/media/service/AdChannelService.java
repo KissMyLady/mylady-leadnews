@@ -1,0 +1,14 @@
+package top.mylady.media.service;
+
+import top.mylady.model.admin.pojos.AdChannel;
+
+import java.util.List;
+
+public interface AdChannelService {
+
+    /**
+     * 查询所有的频道
+     * @return
+     */
+    List<AdChannel>  selectAll();
+}

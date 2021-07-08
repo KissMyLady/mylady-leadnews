@@ -1,0 +1,41 @@
+package top.mylady.model.behavior.dtos;
+
+import top.mylady.model.annotation.IdEncrypt;
+import lombok.Data;
+
+
+/**
+ * 阅读行为, 阅读时间, 阅读百分比
+ */
+@Data
+public class ReadBehaviorDto {
+
+    // 设备ID
+    @IdEncrypt
+    Integer equipmentId;
+
+    // 文章、动态、评论等ID
+    @IdEncrypt
+    Integer articleId;
+
+    /**
+     * 阅读次数
+     */
+    Short count;
+
+    /**
+     * 阅读时长（S)
+     */
+    Integer readDuration;
+
+    /**
+     * 阅读百分比
+     */
+    Short percentage;
+
+    /**
+     * 加载时间
+     */
+    Short loadDuration;
+
+}
